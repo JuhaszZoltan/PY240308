@@ -1,0 +1,31 @@
+from module import *
+
+jatekosok:list[Jatekos] = []
+file = open('juventus.txt', 'r', encoding='utf-8')
+for s in file: jatekosok.append(Jatekos(s))
+
+print(f'f1: jatekosok szama: {len(jatekosok)} fo')
+
+osszeletkor:int = 0
+for j in jatekosok:
+    osszeletkor += (2019 - j.szulev)
+print(f'f2: atlageletkor: {round(osszeletkor / len(jatekosok), 2)} ev')
+
+mini:int = 0
+for i in range(1, len(jatekosok)):
+    if jatekosok[i].szulev < jatekosok[mini].szulev:
+        mini = i
+print(f'f3: legidosebb: {jatekosok[mini].nev}')
+
+dbhatved:int = 0
+for j in jatekosok:
+    if j.poszt == 'hátvéd':
+        dbhatved += 1
+print(f'f4: hatvedek aranya: {dbhatved / len(jatekosok) * 100}%')
+
+kernemzet:str = input('f5: keresett nemzetiseg: ')
+for j in jatekosok:
+    if j.nemzet == kernemzet:
+        print(f'\tVAN {kernemzet} jatekos')
+        break
+else: print(f'\tNINCS {kernemzet} jatekos')
